@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "/home/monic/RiderProjects/PersonaApp/PersonaApp/PersonaApp.csproj": {}
+    "/home/monic/Documents/MyProjects/CrudPeopleCsharp/CRUD-People-C-/PersonaApp/PersonaApp/PersonaApp.csproj": {}
   },
   "projects": {
-    "/home/monic/RiderProjects/PersonaApp/PersonaApp/PersonaApp.csproj": {
+    "/home/monic/Documents/MyProjects/CrudPeopleCsharp/CRUD-People-C-/PersonaApp/PersonaApp/PersonaApp.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "/home/monic/RiderProjects/PersonaApp/PersonaApp/PersonaApp.csproj",
+        "projectUniqueName": "/home/monic/Documents/MyProjects/CrudPeopleCsharp/CRUD-People-C-/PersonaApp/PersonaApp/PersonaApp.csproj",
         "projectName": "PersonaApp",
-        "projectPath": "/home/monic/RiderProjects/PersonaApp/PersonaApp/PersonaApp.csproj",
+        "projectPath": "/home/monic/Documents/MyProjects/CrudPeopleCsharp/CRUD-People-C-/PersonaApp/PersonaApp/PersonaApp.csproj",
         "packagesPath": "/home/monic/.nuget/packages/",
-        "outputPath": "/home/monic/RiderProjects/PersonaApp/PersonaApp/obj/",
+        "outputPath": "/home/monic/Documents/MyProjects/CrudPeopleCsharp/CRUD-People-C-/PersonaApp/PersonaApp/obj/",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "/home/monic/.nuget/NuGet/NuGet.Config"
@@ -96,7 +96,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "/usr/lib/dotnet/sdk/9.0.112/PortableRuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "/usr/lib/dotnet/sdk/9.0.113/PortableRuntimeIdentifierGraph.json"
         }
       }
     }
