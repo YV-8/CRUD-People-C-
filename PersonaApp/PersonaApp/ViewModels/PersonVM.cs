@@ -20,7 +20,7 @@ public class PersonVM : INotifyPropertyChanged
     public ICommand CleanPersonCommand { get; }
     public PersonVM()
     {
-        AddPersonCommand = new RelayCommand(Add);
+        AddPersonCommand = new RelayCommand(Add); 
         UpdatePersonCommand = new RelayCommand(Update);
         DeletePersonCommand = new RelayCommand(Remove);
         CleanPersonCommand = new RelayCommand(Clean);
@@ -38,6 +38,7 @@ public class PersonVM : INotifyPropertyChanged
     private string _name;
     private DateTimeOffset _fechaNaci;
     private string _genre;
+    private string _email;
     private string _password;
     private bool _acceptTerms;
     
@@ -55,6 +56,7 @@ public class PersonVM : INotifyPropertyChanged
                     Name = value.Name;
                     FechaNaci = value.FechaNaci;
                     Genre = value.Genre;
+                    Email = value.Email;
                     Password = value.Password;
                     AcceptTerms = value.AccepTerms;
                 }
@@ -83,7 +85,7 @@ public class PersonVM : INotifyPropertyChanged
         get => _fechaNaci;
         set
         {
-            _fechaNaci = (DateTimeOffset)value;
+            _fechaNaci = value ?? DateTimeOffset.Now;
             OnProperityChanged();
         }
     }
@@ -94,6 +96,16 @@ public class PersonVM : INotifyPropertyChanged
         set
         {
             _genre = value;
+            OnProperityChanged();
+        }
+    }
+
+    public string Email
+    {
+        get => _email;
+        set
+        {
+            _email = value;
             OnProperityChanged();
         }
     }
@@ -138,15 +150,20 @@ public class PersonVM : INotifyPropertyChanged
 
     public void Clean()
     {
-        if (Persons.Count != 0)
-        {
-            Name = string.Empty;
-            FechaNaci = null;
-            Genre = string.Empty;
-            Password = string.Empty;
-            AcceptTerms = false;
-            SelectedPerson = null;
-        }
+        _name = string.Empty;
+        _fechaNaci = DateTimeOffset.Now;
+        _genre = string.Empty;
+        _email = string.Empty;
+        _password = string.Empty;
+        _acceptTerms = false;
+        _selectedPerson = null;
+        OnProperityChanged(nameof(Name));
+        OnProperityChanged(nameof(FechaNaci));
+        OnProperityChanged(nameof(Genre));
+        OnProperityChanged(nameof(Email));
+        OnProperityChanged(nameof(Password));
+        OnProperityChanged(nameof(AcceptTerms));
+        OnProperityChanged(nameof(SelectedPerson));
     }
 
     public bool Validate()=>
@@ -161,6 +178,7 @@ public class PersonVM : INotifyPropertyChanged
             Name = Name,
             FechaNaci = FechaNaci,
             Genre = Genre,
+            Email = Email,
             Password = Password,
             AccepTerms = AcceptTerms,
         };
@@ -178,6 +196,7 @@ public class PersonVM : INotifyPropertyChanged
         SelectedPerson.Name = Name.Trim();
         SelectedPerson.FechaNaci = FechaNaci.Value;
         SelectedPerson.Genre = Genre.Trim();
+        SelectedPerson.Email =  Email.Trim();
         SelectedPerson.Password = Password.Trim();
         _servicePerson.UpdatePerson(SelectedPerson);
         loadDates();

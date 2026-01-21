@@ -16,8 +16,8 @@
             <TextBlock Text="CRUD People" FontSize="28" 
                        FontWeight="Bold" HorizontalAlignment="Center"/>
 
-            <Grid ColumnDefinitions="Auto, *" 
-                  RowDefinitions="Auto,Auto,Auto,Auto,Auto" 
+            <Grid ColumnDefinitions="Auto, *, Auto,*" 
+                  RowDefinitions="Auto,Auto,Auto,Auto,Auto,Auto" 
                   ColumnSpacing="15" RowSpacing="15">
                 
                 <TextBlock Grid.Row="0" Grid.Column="0" VerticalAlignment="Center" Text="Name:"/>
@@ -28,15 +28,20 @@
                 <DatePicker Grid.Row="1" Grid.Column="1" 
                             SelectedDate="{Binding FechaNaci, Mode=TwoWay}"/>
 
-                <TextBlock Grid.Row="2" Grid.Column="0" VerticalAlignment="Center" Text="Genre:"/>
-                <ComboBox Grid.Row="2" Grid.Column="1" HorizontalAlignment="Stretch"
+                <TextBlock Grid.Row="1" Grid.Column="2" VerticalAlignment="Center" Text="Genre:"/>
+                <ComboBox Grid.Row="1" Grid.Column="3" HorizontalAlignment="Stretch"
                           SelectedItem="{Binding Genre, Mode=TwoWay}">
                     <x:String>Masculine</x:String>
                     <x:String>Feminine</x:String>
                     <x:String>Other</x:String>
                 </ComboBox>
-
-                <CheckBox Grid.Row="3" Grid.ColumnSpan="2" 
+                <TextBlock Grid.Row="3" Grid.Column="0" VerticalAlignment="Center" Text="Email: "></TextBlock>
+                <TextBox Grid.Row="3" Grid.Column="1" Watermark="Insert the email..."
+                         Text="{Binding Email, Mode=TwoWay}"/>
+                <TextBlock Grid.Row="4" Grid.Column="0" VerticalAlignment="Center" Text="Password: "></TextBlock>
+                <TextBox Grid.Row="4" Grid.Column="1" Watermark="Insert the password..."
+                         Text="{Binding Password, Mode=TwoWay}"/>
+                <CheckBox Grid.Row="6" Grid.ColumnSpan="2" 
                           Content="Acepto los términos y condiciones"
                           IsChecked="{Binding AcceptTerms, Mode=TwoWay}"/>
             </Grid>
@@ -48,6 +53,7 @@
                 <Button Content="Clean" Width="100" Command="{Binding CleanPersonCommand}"/>
             </StackPanel>
 
+            
             <Separator Margin="0,10"/>
 
             <TextBlock Text="People List" FontWeight="Bold" FontSize="18"/>

@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using Microsoft.EntityFrameworkCore;
@@ -18,8 +19,19 @@ public class ServicePerson
     
     public void AddPerson(Person person)
     {
-        _db.Persons.Add(person); // agrega las personas
-        _db.SaveChanges();//guarda cambios
+        try 
+        {
+            _db.Persons.Add(person); // agrega las personas
+            _db.SaveChanges();//guarda cambios
+        }
+        catch (Exception ex) 
+        {
+            // Esto evita que la app se cierre. 
+            // El error aparecerá en la consola de Rider, pero la app seguirá viva.
+            Console.WriteLine("ERROR AL GUARDAR: " + ex.Message);
+            if (ex.InnerException != null) 
+                Console.WriteLine("DETALLE: " + ex.InnerException.Message);
+        }
     }
 
     public void  UpdatePerson(Person person)
@@ -29,16 +41,21 @@ public class ServicePerson
          se hacer manualmente para queel entity genere un update
          osea "person" no viene traqueada
          */
-        using var context = new AppDBContext();
+        //using var context = new AppDBContext();
+        var tracked = _db.Persons.Local.FirstOrDefault(p => p.Id == person.Id);
+        if (tracked != null)
+        {
+            _db.Entry(tracked).State = EntityState.Detached;
+        }
         _db.Persons.Attach(person);
-        context.Entry(person).State = EntityState.Modified;
-        context.SaveChanges();
+        _db.Entry(person).State = EntityState.Modified;
+        _db.SaveChanges();
     }
 
     public void DeletePerson(Person person)
     {
         /*
-         * Usa estes context para buscar
+         * Usa estos context para buscar
          * ala primera persona con el mismo Id
          * que tiene el person pero en la DB
          */
@@ -46,7 +63,7 @@ public class ServicePerson
             ?? _db.Persons.Find(person.Id);
         if (context != null)
         {
-            _db.Persons.Remove(person);
+            _db.Persons.Remove(context);
             _db.SaveChanges();
         }
         //context.Remove(person).State = EntityState.Deleted;
