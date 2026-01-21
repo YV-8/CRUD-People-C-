@@ -1,0 +1,10 @@
+# Evitar carpetas de compilación
+bin/
+obj/
+
+# Evitar configuraciones de la IDE
+.idea/
+*.user
+
+# Archivos temporales de sistema
+.DS_Store
